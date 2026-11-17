@@ -4,6 +4,8 @@ A sidebar folder for open pull requests you authored or were asked to review in 
 
 ## Install
 
+Download `cra-bitbucket-plugin.zip` from a successful CI run or build it locally.
+
 1. In Cra, open **Settings → Extensions → Live folder plugins → Add Plugin…** and select `cra-bitbucket-plugin.zip`.
 2. In the sidebar, open **Live Folders → Bitbucket…** or run **New Bitbucket Live Folder** from the command bar.
 3. Enter the base address of your Bitbucket instance. Examples include `bitbucket.example.com` and `https://bitbucket.example.com:8443/git`.
