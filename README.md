@@ -27,7 +27,9 @@ The packaging script generates the entry that Cra executes and puts it in `cra-b
 
 ## Repository checks
 
-The central Git hook runs this project's configuration through prek. With prek and uv on your PATH, run the same file and workflow checks as CI:
+The shared Git hook dispatcher picks up this project's `.pre-commit-config.yaml`. For a clone that uses Git's default hook directory, run `prek install --hook-type pre-commit` once to enable the same checks before commits.
+
+With prek and uv on your PATH, run the same file and workflow checks as CI:
 
 ```sh
 prek run --all-files --hook-stage manual
