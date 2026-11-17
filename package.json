@@ -1,0 +1,9 @@
+{
+  "name": "cra-bitbucket",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "package": "node scripts/package.mjs"
+  }
+}

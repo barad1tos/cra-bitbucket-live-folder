@@ -1,0 +1,14 @@
+{
+  "id": "barad1tos.bitbucket",
+  "name": "Bitbucket",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "entry": "main.js",
+  "sessionSetting": "server",
+  "sessionOrigins": [],
+  "command": {
+    "title": "New Bitbucket Live Folder",
+    "description": "Show your open Bitbucket pull requests and review requests.",
+    "triggers": ["bitbucket", "pull requests", "live folder"]
+  }
+}
