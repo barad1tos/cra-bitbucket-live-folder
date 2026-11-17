@@ -13,13 +13,22 @@ The package targets the Cra Live Folder API v1 and the Bitbucket Data Center RES
 
 ## Test and package
 
-Run these commands from the source directory with Node.js, `zip` and `unzip` available.
+Run these commands from the source directory with Node.js 26, `zip` and `unzip` available.
 
 ```sh
+npm ci --ignore-scripts
 npm test
 npm run package
 ```
 
 The packaging script generates the entry that Cra executes and puts it in `cra-bitbucket-plugin.zip`. The tests build and exercise the same archive format.
+
+## Repository checks
+
+The central Git hook runs this project's configuration through prek. With prek and uv on your PATH, run the same file and workflow checks as CI:
+
+```sh
+prek run --all-files --hook-stage manual
+```
 
 See the [Cra Live Folder developer guide](https://github.com/VictorKildahl/cra/blob/v0.1.48/docs/live-folder-plugins.md) and the [Bitbucket dashboard REST API](https://developer.atlassian.com/server/bitbucket/rest/v819/api-group-dashboard/#api-api-latest-dashboard-pull-requests-get).
