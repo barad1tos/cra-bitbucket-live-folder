@@ -19,11 +19,12 @@ Run these commands from the source directory with Node.js 26, `zip` and `unzip` 
 
 ```sh
 npm ci --ignore-scripts
+npm run typecheck
 npm test
 npm run package
 ```
 
-The packaging script generates the entry that Cra executes and puts it in `cra-bitbucket-plugin.zip`. The tests build and exercise the same archive format.
+The packaging script compiles `plugin/main.ts` and writes the JavaScript entry that Cra executes in `cra-bitbucket-plugin.zip`. The tests build and exercise the same archive format.
 
 ## Repository checks
 
