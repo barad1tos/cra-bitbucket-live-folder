@@ -4,6 +4,8 @@ A sidebar folder for open pull requests you authored or were asked to review in 
 
 ## Install
 
+Download `cra-bitbucket-plugin.zip` from a successful CI run or build it locally.
+
 1. In Cra, open **Settings → Extensions → Live folder plugins → Add Plugin…** and select `cra-bitbucket-plugin.zip`.
 2. In the sidebar, open **Live Folders → Bitbucket…** or run **New Bitbucket Live Folder** from the command bar.
 3. Enter the base address of your Bitbucket instance. Examples include `bitbucket.example.com` and `https://bitbucket.example.com:8443/git`.
@@ -13,13 +15,24 @@ The package targets the Cra Live Folder API v1 and the Bitbucket Data Center RES
 
 ## Test and package
 
-Run these commands from the source directory with Node.js, `zip` and `unzip` available.
+Run these commands from the source directory with Node.js 26, `zip` and `unzip` available.
 
 ```sh
+npm ci --ignore-scripts
 npm test
 npm run package
 ```
 
 The packaging script generates the entry that Cra executes and puts it in `cra-bitbucket-plugin.zip`. The tests build and exercise the same archive format.
+
+## Repository checks
+
+The shared Git hook dispatcher picks up this project's `.pre-commit-config.yaml`. For a clone that uses Git's default hook directory, run `prek install --hook-type pre-commit` once to enable the same checks before commits.
+
+With prek and uv on your PATH, run the same file and workflow checks as CI:
+
+```sh
+prek run --all-files --hook-stage manual
+```
 
 See the [Cra Live Folder developer guide](https://github.com/VictorKildahl/cra/blob/v0.1.48/docs/live-folder-plugins.md) and the [Bitbucket dashboard REST API](https://developer.atlassian.com/server/bitbucket/rest/v819/api-group-dashboard/#api-api-latest-dashboard-pull-requests-get).
