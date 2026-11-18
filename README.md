@@ -1,21 +1,33 @@
+<a href="https://crabrowser.app/">
+  <img src="https://raw.githubusercontent.com/VictorKildahl/cra/3b96bad2d0735963d9701c4035d2136e453cc197/brand/cra-segments.svg" width="88" alt="Cra browser mark">
+</a>
+
 # Bitbucket Live Folder for Cra
 
-A sidebar folder for open pull requests you authored or were asked to review in Bitbucket Data Center. Set the server address when you create each folder. Cra uses the signed-in browser profile for that Space.
+Your Bitbucket Data Center pull requests and review requests in the Cra sidebar.
+
+[Install the plugin](#install) · [Get Cra](https://crabrowser.app/) · [Cra on GitHub](https://github.com/VictorKildahl/cra)
+
+This community plugin adds Bitbucket Data Center to [Cra](https://crabrowser.app/), the open-source macOS browser created by Victor Kildahl. Cra keeps Live Folders up to date in the sidebar. Each Bitbucket folder can point to a different server and uses the signed-in profile for its Space.
 
 ## Install
 
-Download `cra-bitbucket-plugin.zip` from a successful CI run or build it locally.
+You’ll need Cra for macOS with Live Folder plugin support and access to a Bitbucket Data Center instance.
 
-1. In Cra, open **Settings → Extensions → Live folder plugins → Add Plugin…** and select `cra-bitbucket-plugin.zip`.
-2. In the sidebar, open **Live Folders → Bitbucket…** or run **New Bitbucket Live Folder** from the command bar.
-3. Enter the base address of your Bitbucket instance. Examples include `bitbucket.example.com` and `https://bitbucket.example.com:8443/git`.
-4. Sign in to Bitbucket in the same Space if prompted. Use the folder menu to toggle **My Pull Requests** or **Review Requests**, or to hide a repository.
+1. Sign in to GitHub and open the latest successful [CI run on `main`](https://github.com/barad1tos/cra-bitbucket-live-folder/actions/workflows/ci.yml?query=branch%3Amain). Under **Artifacts**, download `cra-bitbucket-plugin.zip`.
+2. In Cra, open **Settings → Plugins → Add Plugin…** and select the ZIP. If your version lists **Live folder plugins** under **Settings → Extensions**, use **Add Plugin…** there.
+3. In the Space where you use Bitbucket, run **New Bitbucket Live Folder** from Cra’s command bar. Enter the server address you use in your browser, such as `bitbucket.example.com` or `https://bitbucket.example.com:8443/git`.
+4. If prompted, sign in to Bitbucket in that same Space so the folder can use its browser session.
 
-The package targets the Cra Live Folder API v1 and the Bitbucket Data Center REST API. Both filters are enabled by default. Cra handles authentication with the session for the configured origin.
+## Use the folder
 
-## Test and package
+- **My Pull Requests** shows open pull requests you authored.
+- **Review Requests** shows open pull requests that list you as a reviewer.
+- Both filters start enabled. Use the folder menu to toggle either filter or hide individual repositories.
 
-Run these commands from the source directory with Node.js 26, `zip` and `unzip` available.
+## Build and test
+
+Use Node.js 26 with `zip` and `unzip` installed.
 
 ```sh
 npm ci --ignore-scripts
@@ -24,16 +36,12 @@ npm test
 npm run package
 ```
 
-The packaging script compiles `plugin/main.ts` and writes the JavaScript entry that Cra executes in `cra-bitbucket-plugin.zip`. The tests build and exercise the same archive format.
+The build compiles [`plugin/main.ts`](plugin/main.ts) to the JavaScript entry point Cra loads. The installable `cra-bitbucket-plugin.zip` is written to the repository root. Tests exercise the packaged provider with simulated Bitbucket responses.
 
-## Repository checks
+To run the repository’s CI lint checks locally, install `prek` and `uv`, then run `prek run --all-files --hook-stage manual`. If your clone uses Git’s default hook directory, activate its pre-commit hooks with `prek install --hook-type pre-commit`.
 
-The shared Git hook dispatcher picks up this project's `.pre-commit-config.yaml`. For a clone that uses Git's default hook directory, run `prek install --hook-type pre-commit` once to enable the same checks before commits.
+## Cra project
 
-With prek and uv on your PATH, run the same file and workflow checks as CI:
-
-```sh
-prek run --all-files --hook-stage manual
-```
-
-See the [Cra Live Folder developer guide](https://github.com/VictorKildahl/cra/blob/v0.1.48/docs/live-folder-plugins.md) and the [Bitbucket dashboard REST API](https://developer.atlassian.com/server/bitbucket/rest/v819/api-group-dashboard/#api-api-latest-dashboard-pull-requests-get).
+- [Live Folder plugin guide](https://github.com/VictorKildahl/cra/blob/v0.1.48/docs/live-folder-plugins.md)
+- [Discussion about bundling Bitbucket support in Cra](https://github.com/VictorKildahl/cra/discussions/541)
+- [Cra brand mark](https://github.com/VictorKildahl/cra/tree/3b96bad2d0735963d9701c4035d2136e453cc197/brand) by the Cra project
